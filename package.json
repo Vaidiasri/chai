@@ -2,7 +2,7 @@
   "name": "chai",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
+  "type":"module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/index.js "
@@ -10,8 +10,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "nodemon": "^3.1.14"
+  "description": {
+    "nodemon":"^3.1.14"
   }
 }
