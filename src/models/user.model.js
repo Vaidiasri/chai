@@ -55,4 +55,31 @@ userSchema.pre("save",async function(next){
 userSchema.method.isPassword=async function(password){
     return await bcrypt.compare(password,this.password)
 }
+// token evaluation
+userSchema.method.getAccessToken=function(){
+    jwt.sign({
+        // define  payload
+        _id:this._id,
+        email:this.email,
+        username:this.userName,
+        fullname:this.fullName
+    },
+    process.env.ACCESS_TOKEN,
+    {
+        expiresIn:process.env.ACCESS_TOKEN_EXP
+    }
+)
+}
+userSchema.method.getRefreshToken=function(){
+    jwt.sign({
+        // define  payload
+        _id:this._id,
+    },
+    process.env.REFRESH_TOKEN,
+    {
+        expiresIn:process.env.REFRESH_TOKEN_EXP
+    }
+)
+}
+
 export const User=mongoose.model("User",userSchema)
