@@ -8,12 +8,12 @@ const registerUser=asyncHandler(async (req, res)=>{ // basic controller method
     // res.status(200).json({
     //     message:"hello  😁"
     // })
-    const  {userName,email,fullName,avatar,coverImage,password}=req.body
+    const  {userName,email,fullName,password}=req.body
     console.log(`email : ${email}`)
-    // validation 
+    // validation
     if(
-        [fullName,email,userName,avatar,coverImage,password].some((filed)=>filed?.trim()=="")
-        
+        [fullName,email,userName,password].some((filed)=>filed?.trim()=="")
+
     ){
         {
             throw new ApiError(400,"You miss some  required detail")
@@ -40,8 +40,8 @@ const registerUser=asyncHandler(async (req, res)=>{ // basic controller method
     // crate an object in database
     const  user=await User.create({
         fullName,
-        avatar:uploadAvtar.url,
-        coverImage:uploadCoverImage?.url || "",
+        avatar:uploadAvtar.secure_url,
+        coverImage:uploadCoverImage?.secure_url || "",
         password,
         email,
         userName:userName.toLowerCase()
